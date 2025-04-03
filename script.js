@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // URL for the backend API endpoint
     const LOCAL_BACKEND_URL = 'http://localhost:3000/api/generate';
     // !! IMPORTANT !! Replace this placeholder with your actual deployed Render URL after deployment
-    const PRODUCTION_BACKEND_URL = 'https://sms-generator-backend-service.onrender.com/api/generate';
+    const PRODUCTION_BACKEND_URL = 'https://sms-backend-generator.onrender.com/api/generate';
 
     // Determine which URL to use (simple check for localhost)
     const BACKEND_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
