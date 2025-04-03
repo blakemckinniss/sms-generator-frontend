@@ -1,0 +1,101 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI SMS Generator</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Left Sidebar -->
+        <aside class="sidebar left-sidebar">
+             <h1 class="app-title">AI SMS Generator</h1>
+             <div class="project-selector">
+                 <label for="project">Project:</label>
+                 <select id="project" name="project">
+                     <option value="Bahama Breeze">Bahama Breeze</option>
+                     <option value="Cheddars">Cheddar's Scratch Kitchen</option>
+                     <option value="Yardhouse">Yard House</option>
+                 </select>
+             </div>
+             <div class="info-text">
+                This tool uses AI to help generate marketing SMS copy.
+                Upload relevant marketing materials and past SMS examples for better results.
+             </div>
+        </aside>
+
+        <!-- Main Content Area (Chat) -->
+        <main class="main-content">
+            <div class="chat-display" id="chat-display">
+                <!-- Chat messages will appear here -->
+                <div class="message ai">Welcome! Ask me to generate SMS copy, or use the settings on the right and type your request below. Upload files via the settings panel.</div>
+            </div>
+            <div class="chat-input-area">
+                <textarea id="user-input" placeholder="Type your request here (e.g., 'Generate 3 SMS for a weekend brunch special')"></textarea>
+                <button id="send-button" title="Send Message (Ctrl+Enter)">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20px" height="20px"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+                </button>
+            </div>
+        </main>
+
+        <!-- Right Sidebar (Settings) -->
+        <aside class="sidebar right-sidebar">
+            <h2>Settings</h2>
+            <form id="settings-form">
+                <div class="form-group">
+                    <label for="topic">Topic:</label>
+                    <input type="text" id="topic" name="topic" placeholder="e.g., happy hour, mother's day">
+                </div>
+                <div class="form-group">
+                    <label for="date">Target Date:</label>
+                    <input type="date" id="date" name="date">
+                </div>
+                <div class="form-group">
+                    <label for="tone">Desired Tone:</label>
+                    <input type="text" id="tone" name="tone" placeholder="e.g., urgent, friendly, celebratory">
+                </div>
+                <div class="form-group">
+                    <label for="length">Approx. Length (chars):</label>
+                    <input type="number" id="length" name="length" placeholder="e.g., 140">
+                </div>
+                <div class="form-group">
+                    <label for="href">CTA Link (href):</label>
+                    <input type="url" id="href" name="href" placeholder="https://example.com/offer">
+                </div>
+                <div class="form-group">
+                    <label for="num-results">Number of Results:</label>
+                    <input type="number" id="num-results" name="num_results" value="1" min="1" max="10">
+                </div>
+                <div class="form-group toggle-group">
+                    <label for="use-emojis">Use Emojis:</label>
+                    <label class="switch">
+                        <input type="checkbox" id="use-emojis" name="use_emojis" checked>
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+                <hr>
+                <div class="form-group file-group">
+                    <label for="marketing-file">Marketing Material (.txt):</label>
+                    <input type="file" id="marketing-file" name="marketing_file" accept=".txt">
+                    <span class="file-status" id="marketing-file-status">No file selected</span>
+                </div>
+                <div class="form-group file-group">
+                    <label for="sms-file">SMS Examples (.csv, .txt):</label>
+                    <input type="file" id="sms-file" name="sms_file" accept=".csv, .txt">
+                     <span class="file-status" id="sms-file-status">No file selected</span>
+                </div>
+            </form>
+             <div class="api-notice">
+                AI generation powered by Google Gemini via backend API.
+             </div>
+        </aside>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
