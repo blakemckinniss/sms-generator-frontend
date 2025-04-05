@@ -1,101 +1,139 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI SMS Generator</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Darden SMS Generator</title>
+    <!-- Bootstrap CSS -->
+    <link href="bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Local CSS (Keep for overrides/custom styles) -->
+    <link rel="stylesheet" href="style.min.css">
 </head>
 <body>
-    <div class="app-container">
-        <!-- Left Sidebar -->
-        <aside class="sidebar left-sidebar">
-             <h1 class="app-title">AI SMS Generator</h1>
-             <div class="project-selector">
-                 <label for="project">Project:</label>
-                 <select id="project" name="project">
-                     <option value="Bahama Breeze">Bahama Breeze</option>
-                     <option value="Cheddars">Cheddar's Scratch Kitchen</option>
-                     <option value="Yardhouse">Yard House</option>
-                 </select>
-             </div>
-             <div class="info-text">
-                This tool uses AI to help generate marketing SMS copy.
-                Upload relevant marketing materials and past SMS examples for better results.
-             </div>
-        </aside>
+    <div class="container-fluid vh-100 d-flex flex-column p-0">
+        <div class="row g-0 flex-grow-1">
+            <!-- Left Sidebar -->
+            <aside class="col-md-2 bg-light p-3 d-flex flex-column sidebar left-sidebar">
+                 <img src="logo.png" alt="Darden SMS Generator Logo" class="app-logo mb-3" style="max-width: 100%; height: auto;">
+                 <div class="project-selector mb-3">
+                     <label for="project" class="form-label">Project:</label>
+                     <select id="project" name="project" class="form-select form-select-sm">
+                         <option value="Bahama Breeze">Bahama Breeze</option>
+                         <option value="Cheddars">Cheddar's Scratch Kitchen</option>
+                         <option value="Yardhouse">Yard House</option>
+                     </select>
+                 </div>
+                 <div class="info-text small mb-3">
+                    This tool uses AI to help generate marketing SMS copy.
+                    Upload relevant marketing materials and past SMS examples for better results.
+                 </div>
+                 <hr class="my-3">
+                 <div class="mb-2 file-group">
+                     <label for="marketing-file" class="form-label">Marketing Material (.txt):</label>
+                     <input type="file" id="marketing-file" name="marketing_file" class="form-control form-control-sm" accept=".txt">
+                     <span class="file-status small text-muted" id="marketing-file-status">No file selected</span>
+                 </div>
+                 <div class="mb-3 file-group">
+                     <label for="sms-file" class="form-label">SMS Examples (.csv, .txt):</label>
+                     <input type="file" id="sms-file" name="sms_file" class="form-control form-control-sm" accept=".csv, .txt">
+                      <span class="file-status small text-muted" id="sms-file-status">No file selected</span>
+                 </div>
+                 <button id="clear-files-button-left" class="btn btn-sm btn-outline-secondary mb-3" title="Clear File Selections">Clear Files</button>
 
-        <!-- Main Content Area (Chat) -->
-        <main class="main-content">
-            <div class="chat-display" id="chat-display">
-                <!-- Chat messages will appear here -->
-                <div class="message ai">Welcome! Ask me to generate SMS copy, or use the settings on the right and type your request below. Upload files via the settings panel.</div>
-            </div>
-            <div class="chat-input-area">
-                <textarea id="user-input" placeholder="Type your request here (e.g., 'Generate 3 SMS for a weekend brunch special')"></textarea>
-                <button id="send-button" title="Send Message (Ctrl+Enter)">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20px" height="20px"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
-                </button>
-            </div>
-        </main>
+                 <button id="clear-project-button" class="btn btn-sm btn-outline-secondary mt-auto" title="Clear Project Selection">Clear Project</button>
+            </aside>
 
-        <!-- Right Sidebar (Settings) -->
-        <aside class="sidebar right-sidebar">
-            <h2>Settings</h2>
-            <form id="settings-form">
-                <div class="form-group">
-                    <label for="topic">Topic:</label>
-                    <input type="text" id="topic" name="topic" placeholder="e.g., happy hour, mother's day">
+            <!-- Main Content Area (Chat) -->
+            <main class="col-md-7 d-flex flex-column p-0 main-content">
+                <div class="chat-display flex-grow-1 p-3" id="chat-display" style="overflow-y: auto;">
+                    <!-- Chat messages will appear here -->
+                    <div class="message ai alert alert-info">Welcome! Ask me to generate SMS copy, or use the settings on the right and type your request below. Upload files via the settings panel.</div>
                 </div>
-                <div class="form-group">
-                    <label for="date">Target Date:</label>
-                    <input type="date" id="date" name="date">
+                <button id="clear-history-button" class="btn btn-sm btn-outline-secondary clear-button top-right-button" title="Clear Chat History">Clear History</button>
+                <div class="chat-input-area p-3 border-top bg-light">
+                    <div class="input-group">
+                        <textarea id="user-input" class="form-control" placeholder="Type your request here (e.g., 'Generate 3 SMS for a weekend brunch special')" rows="2"></textarea>
+                        <button id="send-button" class="btn btn-primary" title="Send Message (Ctrl+Enter)">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20px" height="20px"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+                        </button>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="tone">Desired Tone:</label>
-                    <input type="text" id="tone" name="tone" placeholder="e.g., urgent, friendly, celebratory">
-                </div>
-                <div class="form-group">
-                    <label for="length">Approx. Length (chars):</label>
-                    <input type="number" id="length" name="length" placeholder="e.g., 140">
-                </div>
-                <div class="form-group">
-                    <label for="href">CTA Link (href):</label>
-                    <input type="url" id="href" name="href" placeholder="https://example.com/offer">
-                </div>
-                <div class="form-group">
-                    <label for="num-results">Number of Results:</label>
-                    <input type="number" id="num-results" name="num_results" value="1" min="1" max="10">
-                </div>
-                <div class="form-group toggle-group">
-                    <label for="use-emojis">Use Emojis:</label>
-                    <label class="switch">
-                        <input type="checkbox" id="use-emojis" name="use_emojis" checked>
-                        <span class="slider round"></span>
-                    </label>
-                </div>
-                <hr>
-                <div class="form-group file-group">
-                    <label for="marketing-file">Marketing Material (.txt):</label>
-                    <input type="file" id="marketing-file" name="marketing_file" accept=".txt">
-                    <span class="file-status" id="marketing-file-status">No file selected</span>
-                </div>
-                <div class="form-group file-group">
-                    <label for="sms-file">SMS Examples (.csv, .txt):</label>
-                    <input type="file" id="sms-file" name="sms_file" accept=".csv, .txt">
-                     <span class="file-status" id="sms-file-status">No file selected</span>
-                </div>
-            </form>
-             <div class="api-notice">
-                AI generation powered by Google Gemini via backend API.
-             </div>
-        </aside>
+            </main>
+
+            <!-- Right Sidebar (Settings) -->
+            <aside class="col-md-3 bg-light p-3 d-flex flex-column sidebar right-sidebar">
+                <h2 class="h5 mb-3">Settings</h2>
+                <form id="settings-form" class="flex-grow-1" style="overflow-y: auto;">
+                    <div class="mb-2">
+                        <label for="topic" class="form-label">Topic:</label>
+                        <input type="text" id="topic" name="topic" class="form-control form-control-sm" placeholder="e.g., happy hour, mother's day">
+                    </div>
+                    <div class="mb-2">
+                        <label for="date" class="form-label">Target Date:</label>
+                        <input type="date" id="date" name="date" class="form-control form-control-sm">
+                    </div>
+                    <div class="mb-2">
+                        <label for="tone" class="form-label">Desired Tone:</label>
+                        <input type="text" id="tone" name="tone" class="form-control form-control-sm" placeholder="e.g., urgent, friendly, celebratory">
+                    </div>
+                    <div class="mb-2">
+                        <label for="length" class="form-label">Approx. Length (chars):</label>
+                        <input type="number" id="length" name="length" class="form-control form-control-sm" placeholder="e.g., 140">
+                    </div>
+                    <div class="mb-2">
+                        <label for="href" class="form-label">CTA Link (href):</label>
+                        <input type="url" id="href" name="href" class="form-control form-control-sm" placeholder="https://example.com/offer">
+                    </div>
+                    <div class="mb-2">
+                        <label for="num-results" class="form-label">Number of Results:</label>
+                        <input type="number" id="num-results" name="num_results" class="form-control form-control-sm" value="1" min="1" max="10">
+                    </div>
+                    <div class="form-check form-switch mb-3">
+                        <input class="form-check-input" type="checkbox" id="use-emojis" name="use_emojis" checked>
+                        <label class="form-check-label" for="use-emojis">Use Emojis</label>
+                    </div>
+                    <hr>
+                </form>
+                 <div class="button-group mt-3 border-top pt-3">
+                     <button id="clear-settings-button" class="btn btn-sm btn-outline-secondary me-2" title="Clear All Settings Inputs">Clear Settings</button>
+                 </div>
+                 <div class="api-notice small text-muted mt-3">
+                    AI generation powered by Google Gemini via backend API.
+                 </div>
+            </aside>
+        </div>
     </div>
 
-    <script src="script.js"></script>
+    <!-- API Key Modal (Bootstrap) -->
+    <div class="modal fade" id="api-key-modal" tabindex="-1" aria-labelledby="apiKeyModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="apiKeyModalLabel">API Key Required</h5>
+                    <!-- No close button intentionally -->
+                </div>
+                <div class="modal-body">
+                    <p>Please enter your assigned API key to access the generator.</p>
+                    <div class="mb-3">
+                        <label for="modal-api-key-input" class="form-label">API Key:</label>
+                        <input type="password" class="form-control" id="modal-api-key-input" placeholder="Enter your API key">
+                    </div>
+                    <div id="modal-error-message" class="alert alert-danger mt-2" style="display: none;"></div>
+                </div>
+                <div class="modal-footer">
+                    <button id="validate-key-button" type="button" class="btn btn-primary">Validate & Save Key</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap Bundle JS (includes Popper) -->
+    <script src="bootstrap.bundle.min.js"></script>
+    <!-- Local Script -->
+    <script src="script.min.js"></script>
 </body>
 </html>
