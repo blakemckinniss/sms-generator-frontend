@@ -67,41 +67,68 @@
             <!-- Right Sidebar (Settings) -->
             <aside class="col-md-3 bg-light p-3 d-flex flex-column sidebar right-sidebar">
                 <h2 class="h5 mb-3">Settings</h2>
+                <p class="small text-muted mb-3 fst-italic">
+                    Note: Settings entered here override instructions in the main chat input.
+                    Clear a field (using the '×' button or 'Clear Settings') to let the chat input take priority for that parameter.
+                    Inputs with a <span class="input-active-glow px-1 rounded">glow</span> are currently active.
+                </p>
                 <form id="settings-form" class="flex-grow-1" style="overflow-y: auto;">
+
                     <div class="mb-2">
                         <label for="topic" class="form-label">Topic:</label>
-                        <input type="text" id="topic" name="topic" class="form-control form-control-sm" placeholder="e.g., happy hour, mother's day">
+                        <div class="input-group input-group-sm">
+                            <input type="text" id="topic" name="topic" class="form-control form-control-sm" placeholder="e.g., happy hour, mother's day">
+                            <button type="button" class="btn btn-outline-secondary clear-input-btn" aria-label="Clear topic" data-target-input="topic" title="Clear Topic">&times;</button>
+                        </div>
                     </div>
                     <div class="mb-2">
                         <label for="date" class="form-label">Target Date:</label>
-                        <input type="date" id="date" name="date" class="form-control form-control-sm">
+                        <div class="input-group input-group-sm">
+                            <input type="date" id="date" name="date" class="form-control form-control-sm">
+                            <button type="button" class="btn btn-outline-secondary clear-input-btn" aria-label="Clear date" data-target-input="date" title="Clear Date">&times;</button>
+                        </div>
                     </div>
                     <div class="mb-2">
                         <label for="tone" class="form-label">Desired Tone:</label>
-                        <input type="text" id="tone" name="tone" class="form-control form-control-sm" placeholder="e.g., urgent, friendly, celebratory">
+                        <div class="input-group input-group-sm">
+                            <input type="text" id="tone" name="tone" class="form-control form-control-sm" placeholder="e.g., urgent, friendly">
+                            <button type="button" class="btn btn-outline-secondary clear-input-btn" aria-label="Clear tone" data-target-input="tone" title="Clear Tone">&times;</button>
+                        </div>
                     </div>
-                    <div class="mb-2">
-                        <label for="length" class="form-label">Approx. Length (chars):</label>
-                        <input type="number" id="length" name="length" class="form-control form-control-sm" placeholder="e.g., 140">
-                    </div>
-                    <div class="mb-2">
+                    <div class="mb-3">
                         <label for="href" class="form-label">CTA Link (href):</label>
-                        <input type="url" id="href" name="href" class="form-control form-control-sm" placeholder="https://example.com/offer">
+                        <div class="input-group input-group-sm">
+                            <input type="url" id="href" name="href" class="form-control form-control-sm" placeholder="https://example.com/offer">
+                            <button type="button" class="btn btn-outline-secondary clear-input-btn" aria-label="Clear link" data-target-input="href" title="Clear Link">&times;</button>
+                        </div>
+                    </div>
+
+                    <hr class="my-3">
+
+                     <div class="mb-2">
+                        <label for="length" class="form-label">Approx. Length (chars):</label>
+                        <div class="input-group input-group-sm">
+                            <input  id="length" name="length" class="form-control form-control-sm" placeholder="e.g., 140">
+                            <button type="button" class="btn btn-outline-secondary clear-input-btn" aria-label="Clear length" data-target-input="length" title="Clear Length">&times;</button>
+                        </div>
                     </div>
                     <div class="mb-2">
                         <label for="num-results" class="form-label">Number of Results:</label>
-                        <input type="number" id="num-results" name="num_results" class="form-control form-control-sm" value="1" min="1" max="10">
+                        <div class="input-group input-group-sm">
+                            <input  id="num-results" name="num_results" class="form-control form-control-sm" value="1" min="1" max="20">
+                            <button type="button" class="btn btn-outline-secondary clear-input-btn" aria-label="Clear number of results" data-target-input="num-results" title="Clear Number of Results">&times;</button>
+                        </div>
                     </div>
-                    <div class="form-check form-switch mb-3">
+                    <div class="form-check form-switch mb-3 input-wrapper">
                         <input class="form-check-input" type="checkbox" id="use-emojis" name="use_emojis" checked>
                         <label class="form-check-label" for="use-emojis">Use Emojis</label>
                     </div>
-                    <hr>
+
                 </form>
-                 <div class="button-group mt-3 border-top pt-3">
+                 <div class="button-group mt-auto border-top pt-3">
                      <button id="clear-settings-button" class="btn btn-sm btn-outline-secondary me-2" title="Clear All Settings Inputs">Clear Settings</button>
                  </div>
-                 <div class="api-notice small text-muted mt-3">
+                 <div class="api-notice small text-muted mt-2">
                     AI generation powered by Google Gemini via backend API.
                  </div>
             </aside>
