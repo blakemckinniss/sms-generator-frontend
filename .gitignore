@@ -22,7 +22,4 @@ yarn.lock
 # Optional: Ignore build output if you build elsewhere (e.g., CI/CD)
 # script.min.js
 build.js
-package-lock.json
 package.json
-package-lock.json
-script.js
