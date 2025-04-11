@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Darden SMS Generator</title>
+    <title>Darden Content Generator</title> <!-- Updated Title -->
     <!-- Bootstrap CSS -->
     <link href="bootstrap.min.css" rel="stylesheet">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
-    <!-- Local CSS (Keep for overrides/custom styles) -->
+    <!-- Local CSS -->
     <link rel="stylesheet" href="style.min.css">
 </head>
 <body>
@@ -18,8 +18,8 @@
         <div class="row g-0 flex-grow-1">
             <!-- Left Sidebar -->
             <aside class="col-12 col-md-2 bg-light p-3 d-flex flex-column sidebar left-sidebar">
-                 <img src="logo.png" alt="Darden SMS Generator Logo" class="app-logo mb-3 d-none d-md-block" style="max-width: 100%; height: auto;">
-                 <h1 class="h5 text-center mobile-header-text d-block d-md-none">SMS Generator</h1>
+                 <img src="logo.png" alt="Darden Content Generator Logo" class="app-logo mb-3 d-none d-md-block" style="max-width: 100%; height: auto;"> <!-- Assuming logo exists -->
+                 <h1 class="h5 text-center mobile-header-text d-block d-md-none">Content Generator</h1> <!-- Updated Title -->
                  <div class="project-selector mb-3">
                      <label for="project" class="form-label">Project:</label>
                      <select id="project" name="project" class="form-select form-select-sm">
@@ -28,9 +28,7 @@
                          <option value="Yardhouse">Yard House</option>
                      </select>
                  </div>
-                 <div class="info-text small mb-3">
-                    This tool uses AI to help generate marketing SMS copy.
-                    Upload relevant marketing materials and past SMS examples for better results.
+                 <!-- Mode Selector -->
                  <div class="mode-selector mb-3">
                      <label class="form-label">Mode:</label>
                      <div class="btn-group btn-group-sm w-100" role="group" aria-label="Mode Selection">
@@ -41,21 +39,27 @@
                          <label class="btn btn-outline-primary" for="mode-email">Email</label>
                      </div>
                  </div>
+                 <!-- Info Text (Common) -->
+                 <div class="info-text small mb-3">
+                    This tool uses AI to help generate marketing copy.
+                    <span class="sms-only">Upload relevant marketing materials and past SMS examples for better results.</span>
+                    <span class="email-only">The AI uses past successful email campaign data for context.</span>
                  </div>
-                 <hr class="my-3">
-                 <div class="mb-2 file-group">
+                 <!-- SMS Only File Uploads -->
+                 <hr class="my-3 sms-only">
+                 <div class="mb-2 file-group sms-only">
                      <span class="form-label d-block">Marketing Material (.txt):</span>
                      <label for="marketing-file" class="file-input-label-button" title="Upload Marketing Material"> Upload</label>
                      <input type="file" id="marketing-file" name="marketing_file" class="form-control form-control-sm" accept=".txt">
                      <span class="file-status small text-muted" id="marketing-file-status">No file selected</span>
                  </div>
-                 <div class="mb-3 file-group">
+                 <div class="mb-3 file-group sms-only">
                      <span class="form-label d-block">SMS Examples (.csv, .txt):</span>
                      <label for="sms-file" class="file-input-label-button" title="Upload SMS Examples"> Upload</label>
                      <input type="file" id="sms-file" name="sms_file" class="form-control form-control-sm" accept=".csv, .txt">
                       <span class="file-status small text-muted" id="sms-file-status">No file selected</span>
                  </div>
-                 <button id="clear-files-button-left" class="btn btn-sm btn-outline-secondary mb-3" title="Clear File Selections">Clear Files</button>
+                 <button id="clear-files-button-left" class="btn btn-sm btn-outline-secondary mb-3 sms-only" title="Clear File Selections">Clear Files</button>
 
                  <button id="clear-project-button" class="btn btn-sm btn-outline-secondary mt-auto" title="Clear Project Selection">Clear Project</button>
             </aside>
@@ -88,6 +92,7 @@
                 </p>
                 <form id="settings-form" class="flex-grow-1" style="overflow-y: auto;">
 
+                    <!-- Common Settings -->
                     <div class="mb-2">
                         <label for="topic" class="form-label">Topic:</label>
                         <div class="input-group input-group-sm">
@@ -117,39 +122,43 @@
                         </div>
                     </div>
 
-                    <hr class="my-3">
+                    <hr class="my-3"> <!-- Common divider -->
 
-                     <div class="mb-2">
-                    <div class="mb-2 email-only" style="display: none;"> <!-- Initially hidden -->
+                    <!-- Email Only Settings -->
+                    <div class="mb-2 email-only">
                         <label for="email-subject" class="form-label">Subject Line:</label>
                         <div class="input-group input-group-sm">
                             <input type="text" id="email-subject" name="subject" class="form-control form-control-sm" placeholder="e.g., A Special Offer Just For You!">
                             <button type="button" class="btn btn-outline-secondary clear-input-btn" aria-label="Clear subject" data-target-input="email-subject" title="Clear Subject">&times;</button>
                         </div>
                     </div>
-                    <div class="mb-3 email-only" style="display: none;"> <!-- Initially hidden -->
+                    <div class="mb-3 email-only">
                         <label for="email-message" class="form-label">Message Text:</label>
                         <div class="input-group input-group-sm">
                             <textarea id="email-message" name="message" class="form-control form-control-sm" rows="3" placeholder="Optional: Provide email body text..."></textarea>
                             <button type="button" class="btn btn-outline-secondary clear-input-btn" aria-label="Clear message" data-target-input="email-message" title="Clear Message Text">&times;</button>
                         </div>
                     </div>
-                    <hr class="my-3 email-only" style="display: none;">
+                    <hr class="my-3 email-only"> <!-- Divider specific to email section -->
 
-                        <label for="length" class="form-label">Approx. Length (chars):</label>
-                        <div class="input-group input-group-sm">
-                            <input  id="length" name="length" class="form-control form-control-sm" placeholder="e.g., 140">
-                            <button type="button" class="btn btn-outline-secondary clear-input-btn" aria-label="Clear length" data-target-input="length" title="Clear Length">&times;</button>
-                        </div>
-                    </div>
+                    <!-- SMS Only Settings -->
+                    <div class="mb-2 sms-only">
+                         <label for="length" class="form-label">Approx. Length (chars):</label>
+                         <div class="input-group input-group-sm">
+                             <input  id="length" name="length" class="form-control form-control-sm" placeholder="e.g., 140">
+                             <button type="button" class="btn btn-outline-secondary clear-input-btn" aria-label="Clear length" data-target-input="length" title="Clear Length">&times;</button>
+                         </div>
+                     </div>
+
+                    <!-- Common Settings Continued -->
                     <div class="mb-2">
                         <label for="num-results" class="form-label">Number of Results:</label>
                         <div class="input-group input-group-sm">
-                            <input  id="num-results" name="num_results" class="form-control form-control-sm" value="1" min="1" max="20">
+                            <input type="number" id="num-results" name="num_results" class="form-control form-control-sm" value="1" min="1" max="20"> <!-- Changed type to number -->
                             <button type="button" class="btn btn-outline-secondary clear-input-btn" aria-label="Clear number of results" data-target-input="num-results" title="Clear Number of Results">&times;</button>
                         </div>
                     </div>
-                    <div class="form-check form-switch mb-3 input-wrapper sms-only">
+                    <div class="form-check form-switch mb-3 input-wrapper"> <!-- Emojis toggle common -->
                         <input class="form-check-input" type="checkbox" id="use-emojis" name="use_emojis" checked>
                         <label class="form-check-label" for="use-emojis">Use Emojis</label>
                     </div>
