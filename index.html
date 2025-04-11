@@ -10,10 +10,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Shadows+Into+Light&display=swap" rel="stylesheet">
     <!-- Local CSS (Keep for overrides/custom styles) -->
     <link rel="stylesheet" href="style.min.css">
 </head>
@@ -22,7 +18,8 @@
         <div class="row g-0 flex-grow-1">
             <!-- Left Sidebar -->
             <aside class="col-12 col-md-2 bg-light p-3 d-flex flex-column sidebar left-sidebar">
-                 <h1 style="font-family: 'Amatic SC', sans-serif; font-weight: 700;">Darden SMS Generator</h1>
+                 <img src="logo.png" alt="Darden SMS Generator Logo" class="app-logo mb-3 d-none d-md-block" style="max-width: 100%; height: auto;">
+                 <h1 class="h5 text-center mobile-header-text d-block d-md-none">SMS Generator</h1>
                  <div class="project-selector mb-3">
                      <label for="project" class="form-label">Project:</label>
                      <select id="project" name="project" class="form-select form-select-sm">
@@ -34,6 +31,16 @@
                  <div class="info-text small mb-3">
                     This tool uses AI to help generate marketing SMS copy.
                     Upload relevant marketing materials and past SMS examples for better results.
+                 <div class="mode-selector mb-3">
+                     <label class="form-label">Mode:</label>
+                     <div class="btn-group btn-group-sm w-100" role="group" aria-label="Mode Selection">
+                         <input type="radio" class="btn-check" name="mode" id="mode-sms" value="sms" autocomplete="off" checked>
+                         <label class="btn btn-outline-primary" for="mode-sms">SMS</label>
+
+                         <input type="radio" class="btn-check" name="mode" id="mode-email" value="email" autocomplete="off">
+                         <label class="btn btn-outline-primary" for="mode-email">Email</label>
+                     </div>
+                 </div>
                  </div>
                  <hr class="my-3">
                  <div class="mb-2 file-group">
@@ -57,13 +64,13 @@
             <main class="col-12 col-md-7 d-flex flex-column p-0 main-content">
                 <div class="chat-display flex-grow-1 p-3" id="chat-display" style="overflow-y: auto;">
                     <!-- Chat messages will appear here -->
-                    <div class="message ai alert alert-info">Welcome! Ask me to generate SMS copy, or use the settings on the right and type your request below. Upload files via the settings panel.</div>
+                    <div class="message ai alert alert-info">Welcome! Select a mode (SMS/Email), choose a project, and type your request below, or use the settings on the right.</div>
                 </div>
                 <button id="clear-history-button" class="btn btn-sm btn-outline-secondary clear-button top-right-button" title="Clear Chat History">Clear History</button>
                  <button id="download-history-button" class="btn btn-sm btn-outline-secondary clear-button top-right-button" style="top: 45px;" title="Download AI Messages">Download All</button>
                 <div class="chat-input-area p-3 border-top bg-light">
                     <div class="input-group">
-                        <textarea id="user-input" class="form-control" placeholder="Type your request here (e.g., 'Generate 3 SMS for a weekend brunch special')" rows="2"></textarea>
+                        <textarea id="user-input" class="form-control" placeholder="Type your request (e.g., 'Generate 3 variations for a weekend special')" rows="2"></textarea>
                         <button id="send-button" class="btn btn-primary" title="Send Message (Ctrl+Enter)">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20px" height="20px"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
                         </button>
@@ -113,6 +120,22 @@
                     <hr class="my-3">
 
                      <div class="mb-2">
+                    <div class="mb-2 email-only" style="display: none;"> <!-- Initially hidden -->
+                        <label for="email-subject" class="form-label">Subject Line:</label>
+                        <div class="input-group input-group-sm">
+                            <input type="text" id="email-subject" name="subject" class="form-control form-control-sm" placeholder="e.g., A Special Offer Just For You!">
+                            <button type="button" class="btn btn-outline-secondary clear-input-btn" aria-label="Clear subject" data-target-input="email-subject" title="Clear Subject">&times;</button>
+                        </div>
+                    </div>
+                    <div class="mb-3 email-only" style="display: none;"> <!-- Initially hidden -->
+                        <label for="email-message" class="form-label">Message Text:</label>
+                        <div class="input-group input-group-sm">
+                            <textarea id="email-message" name="message" class="form-control form-control-sm" rows="3" placeholder="Optional: Provide email body text..."></textarea>
+                            <button type="button" class="btn btn-outline-secondary clear-input-btn" aria-label="Clear message" data-target-input="email-message" title="Clear Message Text">&times;</button>
+                        </div>
+                    </div>
+                    <hr class="my-3 email-only" style="display: none;">
+
                         <label for="length" class="form-label">Approx. Length (chars):</label>
                         <div class="input-group input-group-sm">
                             <input  id="length" name="length" class="form-control form-control-sm" placeholder="e.g., 140">
@@ -126,7 +149,7 @@
                             <button type="button" class="btn btn-outline-secondary clear-input-btn" aria-label="Clear number of results" data-target-input="num-results" title="Clear Number of Results">&times;</button>
                         </div>
                     </div>
-                    <div class="form-check form-switch mb-3 input-wrapper">
+                    <div class="form-check form-switch mb-3 input-wrapper sms-only">
                         <input class="form-check-input" type="checkbox" id="use-emojis" name="use_emojis" checked>
                         <label class="form-check-label" for="use-emojis">Use Emojis</label>
                     </div>
