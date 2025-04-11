@@ -649,3 +649,12 @@ body.mode-email-active hr.email-only {
         max-width: 95%; /* Allow messages to be slightly wider */
     }
 }
+
+/* Mode-specific visibility for common settings */
+body.mode-email-active .common-settings-group {
+    display: none;
+}
+
+body.mode-sms-active .common-settings-group {
+    display: block; /* Show when SMS mode is active */
+}
