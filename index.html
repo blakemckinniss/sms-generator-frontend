@@ -64,23 +64,46 @@
                  <button id="clear-project-button" class="btn btn-sm btn-outline-secondary mt-auto" title="Clear Project Selection">Clear Project</button>
             </aside>
 
-            <!-- Main Content Area (Chat) -->
-            <main class="col-12 col-md-7 d-flex flex-column p-0 main-content">
-                <div class="chat-display flex-grow-1 p-3" id="chat-display" style="overflow-y: auto;">
-                    <!-- Chat messages will appear here -->
-                    <div class="message ai alert alert-info">Welcome! Select a mode (SMS/Email), choose a project, and type your request below, or use the settings on the right.</div>
-                </div>
-                <button id="clear-history-button" class="btn btn-sm btn-outline-secondary clear-button top-right-button" title="Clear Chat History">Clear History</button>
-                 <button id="download-history-button" class="btn btn-sm btn-outline-secondary clear-button top-right-button" style="top: 45px;" title="Download AI Messages">Download All</button>
-                <div class="chat-input-area p-3 border-top bg-light">
-                    <div class="input-group">
-                        <textarea id="user-input" class="form-control" placeholder="Type your request (e.g., 'Generate 3 variations for a weekend special')" rows="2"></textarea>
-                        <button id="send-button" class="btn btn-primary" title="Send Message (Ctrl+Enter)">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20px" height="20px"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
-                        </button>
+            <!-- Main Content Area (Container for SMS/Email Modes) -->
+            <div class="col-12 col-md-7 d-flex flex-column p-0 main-content-container">
+
+                <!-- SMS Mode Chat Area (Initially Visible) -->
+                <main id="sms-chat-area" class="d-flex flex-column p-0 main-content flex-grow-1">
+                    <div class="chat-display flex-grow-1 p-3" id="sms-chat-display" style="overflow-y: auto;">
+                        <!-- SMS Chat messages will appear here -->
+                        <div class="message ai alert alert-info">Welcome to SMS mode! Select a project and type your request below, or use the settings on the right.</div>
                     </div>
-                </div>
-            </main>
+                    <button id="clear-sms-history-button" class="btn btn-sm btn-outline-secondary clear-button top-right-button" title="Clear SMS Chat History">Clear SMS History</button>
+                    <button id="download-sms-history-button" class="btn btn-sm btn-outline-secondary clear-button top-right-button" style="top: 45px;" title="Download SMS AI Messages">Download SMS</button>
+                    <div class="chat-input-area p-3 border-top bg-light">
+                        <div class="input-group">
+                            <textarea id="sms-user-input" class="form-control user-input-area" placeholder="Type your SMS request (e.g., 'Generate 3 variations for a weekend special')" rows="2"></textarea>
+                            <button id="sms-send-button" class="btn btn-primary send-button" title="Send SMS Request (Ctrl+Enter)">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20px" height="20px"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+                            </button>
+                        </div>
+                    </div>
+                </main>
+
+                <!-- Email Mode Chat Area (Initially Hidden) -->
+                <main id="email-chat-area" class="d-none flex-column p-0 main-content flex-grow-1"> <!-- Start hidden -->
+                    <div class="chat-display flex-grow-1 p-3" id="email-chat-display" style="overflow-y: auto;">
+                        <!-- Email Chat messages will appear here -->
+                         <div class="message ai alert alert-info">Welcome to Email mode! Select a project and type your request below, or use the settings on the right.</div>
+                    </div>
+                     <button id="clear-email-history-button" class="btn btn-sm btn-outline-secondary clear-button top-right-button" title="Clear Email Chat History">Clear Email History</button>
+                     <button id="download-email-history-button" class="btn btn-sm btn-outline-secondary clear-button top-right-button" style="top: 45px;" title="Download Email AI Messages">Download Email</button>
+                    <div class="chat-input-area p-3 border-top bg-light">
+                        <div class="input-group">
+                            <textarea id="email-user-input" class="form-control user-input-area" placeholder="Type your Email request (e.g., 'Generate subject and message for summer sale')" rows="2"></textarea>
+                            <button id="email-send-button" class="btn btn-primary send-button" title="Send Email Request (Ctrl+Enter)">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20px" height="20px"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+                            </button>
+                        </div>
+                    </div>
+                </main>
+
+            </div> <!-- End Main Content Area Container -->
 
             <!-- Right Sidebar (Settings) -->
             <aside class="col-12 col-md-3 bg-light p-3 d-flex flex-column sidebar right-sidebar">
